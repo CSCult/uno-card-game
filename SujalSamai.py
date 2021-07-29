@@ -8,7 +8,6 @@
 # Importing libraries
 import random
 
-playerDraw=0
 
 def buildDeck():
     deck = []
@@ -134,9 +133,11 @@ while playing:
             if currentcolor=="Wild":
                 for x in range(len(colors)):
                     print("{}. {}".format(x+1,colors[x]))
-                userChoice= int(input("Which color would you like to choose?"))
+                userChoice= int(input("Which color would you like to choose? "))
+                currentcolor=colors[userChoice-1]
+                print("Choosen color is {}".format(currentcolor))
                 while userChoice<1 or userChoice>4:
-                    userChoice= int(input("Sorry, Invalid Option!! Which color would you like to choose?"))
+                    userChoice= int(input("Sorry, Invalid Option!! Which color would you like to choose? "))
                 currentcolor=colors[userChoice-1]            #colors = ["Red", "Green", "Yellow", "Blue"]
             elif cardValue=="Reverse":
                 playDirection= playDirection* -1
