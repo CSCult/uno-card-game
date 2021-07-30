@@ -62,12 +62,6 @@ def showHand(player, playerHand):
     print("")
 
 
-"""
-Check whether a player is able to play a card or not
-Parameters: color->string, value->string, playerHand-> list
-If the card is a Wild, they can play no matter what
-"""
-
 def canPlay(color, value, playerHand):
     # checking cards in playerHand returning true if color or value is present or the card is wild else returning false
     for card in playerHand:
@@ -86,12 +80,15 @@ discards = []                                       # list for our discard pile
 players = []
 
 colors = ["Red", "Green", "Yellow", "Blue"]
-
 # taking number of players as input we will be having 2 to 4 players
-numPlayers = int(input("Enter the number of players: "))
+print("")
+numPlayers = int(input("Enter the number of players (2/3/4): "))
 if numPlayers<2 or numPlayers>4:
     numPlayers = int(input("Invalid input... Please Enter the number of players between 2-4: "))
-num=int(input("Enter How many cards you want to draw for each player: "))
+num=int(input("Enter How many cards you want to draw for each player (4-7): "))
+print("")
+print("Let's begin the Game!!")
+print("")
 for player in range(numPlayers):
     players.append(drawCards(num))
 
@@ -116,7 +113,7 @@ while playing:
         cardChoice= int(input("Which Card do you want to play? "))
         while not canPlay(currentcolor,cardValue,[players[playerTurn][cardChoice-1]]):
             cardChoice= int(input("Invalid Card... Which Card do you want to play? "))
-        print("You played {}".format(players[playerTurn][cardChoice-1]))
+        print("Player {} played: {}".format(playerTurn+1,players[playerTurn][cardChoice-1]))
         discards.append(players[playerTurn].pop(cardChoice-1))
     #check winner
         if len(players[playerTurn])==0:
@@ -135,7 +132,7 @@ while playing:
                     print("{}. {}".format(x+1,colors[x]))
                 userChoice= int(input("Which color would you like to choose? "))
                 currentcolor=colors[userChoice-1]
-                print("Choosen color is {}".format(currentcolor))
+                print("Choosen color is {}".format(userChoice))
                 while userChoice<1 or userChoice>4:
                     userChoice= int(input("Sorry, Invalid Option!! Which color would you like to choose? "))
                 currentcolor=colors[userChoice-1]            #colors = ["Red", "Green", "Yellow", "Blue"]
@@ -147,28 +144,25 @@ while playing:
                     playerTurn= 0
                 elif playerTurn<0:
                     playerTurn=numPlayers-1
-
             elif cardValue=="Draw Two":
-                playerDraw == playerTurn+playDirection
+                playerDraw = playerTurn+playDirection
                 if playerDraw==numPlayers:
                     playerDraw= 0
                 elif playerDraw<0:
                     playerDraw=numPlayers-1
-                playDirection[playerDraw].extend(drawCards(2))
+                players[playerDraw].extend(drawCards(2))
             elif cardValue=="Draw Four":
                 playerDraw == playerTurn+playDirection
                 if playerDraw==numPlayers:
                     playerDraw= 0
                 elif playerDraw<0:
                     playerDraw=numPlayers-1
-                playDirection[playerDraw].extend(drawCards(4))
+                players[playerDraw].extend(drawCards(4))
             print("")
     else:
         print("Sorry! You can't play. Please draw a card.")
         players[playerTurn].extend(drawCards(1))
     print("")
-
-
 
 
     playerTurn+= playDirection
@@ -178,4 +172,6 @@ while playing:
         playerTurn=numPlayers-1
 
 print("Game Over...")
-print("{} is the Winner!".format(winner))
+print("COngratulations! {}...".format(winner))
+print("You are the winner!!")
+print("")
