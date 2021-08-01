@@ -1,12 +1,22 @@
 
 #Author: Sujal Samai
+
 #Date Created: 
+
+#Date Created: 1 Aug,2021
+
 #Title: UNO CARD GAME
 
 
 
 # Importing libraries
 import random
+
+'''
+Generate the UNO deck of 108 cards.
+Parameter: None
+Return value: deck->list 
+'''
 
 
 def buildDeck():
@@ -17,7 +27,11 @@ def buildDeck():
     # appending combination of all this 3 list into the deck using for loops
     for color in colors:
         for value in values:
+
             card="{} {}".format(color, value)              
+=======
+            card="{} {}".format(color, value)              # formate for this -> (color,values)
+
             deck.append(card)
             if value !=0:
                 deck.append(card)
@@ -191,3 +205,6 @@ print("Game Over...")
 print("COngratulations! {}...".format(winner))
 print("You are the winner!!")
 print("")
+=======
+uno_deck= buildDeck()
+
