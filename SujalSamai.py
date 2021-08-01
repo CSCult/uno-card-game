@@ -128,14 +128,30 @@ while playing:
             else:
                 cardValue=splitCard[1]
             if currentcolor=="Wild":
-                for x in range(len(colors)):
-                    print("{}. {}".format(x+1,colors[x]))
-                userChoice= int(input("Which color would you like to choose? "))
-                currentcolor=colors[userChoice-1]
-                print("Choosen color is {}".format(userChoice))
-                while userChoice<1 or userChoice>4:
-                    userChoice= int(input("Sorry, Invalid Option!! Which color would you like to choose? "))
-                currentcolor=colors[userChoice-1]            #colors = ["Red", "Green", "Yellow", "Blue"]
+                if cardValue=="draw four":
+                    for x in range(len(colors)):
+                        print("{}. {}".format(x+1,colors[x]))
+                    userChoice= int(input("Which color would you like to choose? "))
+                    currentcolor=colors[userChoice-1]
+                    print("Choosen color is {}".format(currentcolor))
+                    while userChoice<1 or userChoice>4:
+                        userChoice= int(input("Sorry, Invalid Option!! Which color would you like to choose? "))
+                    currentcolor=colors[userChoice-1]            #colors = ["Red", "Green", "Yellow", "Blue"]
+                    playerDraw = playerTurn+playDirection
+                    if playerDraw>=numPlayers:
+                        playerDraw= 0
+                    elif playerDraw<0:
+                        playerDraw=numPlayers-1
+                    players[playerDraw].extend(drawCards(4))
+                else:
+                    for x in range(len(colors)):
+                        print("{}. {}".format(x+1,colors[x]))
+                    userChoice= int(input("Which color would you like to choose? "))
+                    currentcolor=colors[userChoice-1]
+                    print("Choosen color is {}".format(currentcolor))
+                    while userChoice<1 or userChoice>4:
+                        userChoice= int(input("Sorry, Invalid Option!! Which color would you like to choose? "))
+                    currentcolor=colors[userChoice-1] 
             elif cardValue=="Reverse":
                 playDirection= playDirection* -1
             elif cardValue=="Skip":
@@ -146,14 +162,14 @@ while playing:
                     playerTurn=numPlayers-1
             elif cardValue=="Draw Two":
                 playerDraw = playerTurn+playDirection
-                if playerDraw==numPlayers:
+                if playerDraw>=numPlayers:
                     playerDraw= 0
                 elif playerDraw<0:
                     playerDraw=numPlayers-1
                 players[playerDraw].extend(drawCards(2))
             elif cardValue=="Draw Four":
-                playerDraw == playerTurn+playDirection
-                if playerDraw==numPlayers:
+                playerDraw = playerTurn+playDirection
+                if playerDraw>=numPlayers:
                     playerDraw= 0
                 elif playerDraw<0:
                     playerDraw=numPlayers-1
